@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,14 +16,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'appName' => config('app.name'),
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'appSlogan' => config('app.slogan', 'Sharing is caring')
-    ]);
-})->name('index');
+Route::get('/', [GuestController::class, 'index'])->name('index');
 
 
 Route::get('blog', function () {
