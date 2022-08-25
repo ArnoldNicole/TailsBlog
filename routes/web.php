@@ -17,20 +17,20 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
+        'appName' => config('app.name'),
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'appSlogan' => config('app.slogan', 'Sharing is caring')
     ]);
-});
+})->name('index');
 
 
 Route::get('blog', function () {
     return Inertia::render('BlogArticle', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'appName' => config('app.name'),
+        'appSlogan' => config('app.slogan', 'Sharing is caring')
     ]);
 })->name('blog');
 

@@ -6,13 +6,13 @@ import SiteLayout from "@/Pages/Layout/SiteLayout.vue"
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+    appName: String,
+    appSlogan: String
 })
 </script>
 
 <template>
-    <SiteLayout>
+    <SiteLayout :appName="appName" :appSlogan="appSlogan">
         <!-- Section 2 -->
         <section class="px-2 py-32 bg-white md:px-0">
             <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
@@ -54,7 +54,6 @@ defineProps({
                 </div>
             </div>
         </section>
-
         <!-- Section 3 -->
         <section class="bg-white">
             <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-8 md:py-12 sm:space-y-8 md:space-y-16 max-w-7xl">
