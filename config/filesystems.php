@@ -39,7 +39,29 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'cover_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/coverImages'),
+            'url' => env('APP_URL') . '/storage/coverImages',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'category_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/categoryImages'),
+            'url' => env('APP_URL') . '/storage/categoryImages',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'attachments' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/attachment'),
+            'url' => env('APP_URL') . '/storage/attachment',
             'visibility' => 'public',
             'throw' => false,
         ],

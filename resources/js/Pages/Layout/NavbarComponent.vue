@@ -1,7 +1,8 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
 defineProps({
-    appName: String
+    appName: String,
+    Categories: Array,
 })
 </script>
 <template>
@@ -17,16 +18,17 @@ defineProps({
                     class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
                     <Link :href="route('index')" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">
                     Home</Link>
-                    <Link :href="route('blog')" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">
-                    Blog</Link>
+                    <Link v-for="category, c in Categories" :key="c" :href="route('category', category.name)"
+                        class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">
+                    {{ category.name }}</Link>
                 </nav>
             </div>
 
             <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
-                <a href="#"
+                <Link :href="route('blog')"
                     class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                    Admin Dashboard
-                </a>
+                Blog
+                </Link>
             </div>
         </div>
     </section>

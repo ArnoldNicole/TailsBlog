@@ -17,16 +17,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [GuestController::class, 'index'])->name('index');
+Route::get('category/{category:name}/browse', [GuestController::class, 'category'])->name('category');
 
 
-Route::get('blog', function () {
-    return Inertia::render('BlogArticle', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'appName' => config('app.name'),
-        'appSlogan' => config('app.slogan', 'Sharing is caring')
-    ]);
-})->name('blog');
+Route::get('blog',  [GuestController::class, 'blog'])->name('blog');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

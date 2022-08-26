@@ -2,6 +2,15 @@ import './bootstrap';
 import '../css/app.css';
 import 'tw-elements';
 
+import Alpine from 'alpinejs'
+import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
+
+Alpine.plugin(NotificationsAlpinePlugin)
+
+window.Alpine = Alpine
+
+Alpine.start()
+
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';

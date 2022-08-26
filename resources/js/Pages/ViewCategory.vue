@@ -8,10 +8,9 @@ defineProps({
     canRegister: Boolean,
     appName: String,
     appSlogan: String,
-    AppData: Array,
     Categories: Array,
-    Articles: Array,
-    FeaturedArticle: Object
+    Category: Object,
+    Articles: Object
 })
 </script>
 
@@ -27,15 +26,15 @@ defineProps({
                             class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                             <h1
                                 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                                <span class="block xl:inline">{{ AppData.headline }}</span>
-                                <span class="block text-indigo-600 xl:inline">{{ AppData.sub_headline }}</span>
+                                <span class="block xl:inline">{{ Category.headline }}</span>
+                                <span class="block text-indigo-600 xl:inline">{{ Category.sub_headline }}</span>
                             </h1>
                             <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-                                {{ AppData.tagline }}</p>
+                                {{ Category.tagline }}</p>
                             <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-                                <a href="#_"
+                                <a href="#all_articles"
                                     class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
-                                    Latest articles
+                                    All articles
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -49,21 +48,21 @@ defineProps({
                     </div>
                     <div class="w-full md:w-1/2">
                         <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-                            <img src="https://cdn.devdojo.com/images/november2020/hero-image.jpeg">
+                            <img :src="`/storage/categoryImages/${Category.image}`" class="w-full">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Section 3 -->
-        <section class="bg-white">
+        <section class="bg-white" id="all_articles">
             <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-8 md:py-12 sm:space-y-8 md:space-y-16 max-w-7xl">
 
-                <div class="flex flex-col items-center sm:px-5 md:flex-row" v-if="FeaturedArticle">
+                <!-- <div class="flex flex-col items-center sm:px-5 md:flex-row">
                     <div class="w-full md:w-1/2">
                         <a href="#_" class="block">
                             <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
-                                :src="`/storage/coverImages/${FeaturedArticle.cover_image}`">
+                                src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg">
                         </a>
                     </div>
                     <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
@@ -79,40 +78,35 @@ defineProps({
                                 </svg>
                                 <span>Featured</span>
                             </div>
-                            <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="#_">{{
-                                    FeaturedArticle.title
-                            }}</a></h1>
-                            <p class="pt-2 text-sm font-medium">
-                                <!-- by <a href="#_" class="mr-1 underline">John Doe</a> · -->
-                                <span class="mx-1">Published on {{ FeaturedArticle.created_at }}</span> · <span
-                                    class="mx-1 text-gray-600">5 min.
+                            <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="#_">Savory
+                                    Templates. Sweet Designs.</a></h1>
+                            <p class="pt-2 text-sm font-medium">by <a href="#_" class="mr-1 underline">John Doe</a> ·
+                                <span class="mx-1">April 23rd, 2021</span> · <span class="mx-1 text-gray-600">5 min.
                                     read</span>
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
                     <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4"
-                        v-for="article, a in Articles" :key="a">
+                        v-for="article, a in Articles.data" :key="a">
                         <a href="#_" class="block">
                             <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
                                 :src="`/storage/coverImages/${article.cover_image}`">
                         </a>
-                        <div :style="`background-color: ${article.category.color};`"
+                        <div :style="`background-color: ${Category.color};`"
                             class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                            <span>{{ article.category.name }}</span>
+                            <span>{{ Category.name }}</span>
                         </div>
                         <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="#_">{{ article.title }}</a>
                         </h2>
                         <p class="text-sm text-gray-500">{{ article.catch_line }}</p>
-                        <p class="pt-2 text-xs font-medium">
-                            <!-- <a href="#_" class="mr-1 underline">Mary Jane</a> ·  -->
-                            <span class="mx-1">{{ article.created_at }}</span> · <span class="mx-1 text-gray-600">3 min.
+                        <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Mary Jane</a> · <span
+                                class="mx-1">{{ article.created_at }}</span> · <span class="mx-1 text-gray-600">3 min.
                                 read</span>
                         </p>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -139,55 +133,6 @@ defineProps({
             </div>
         </section>
 
-        <!-- Section 5 -->
-        <section class="relative py-16 bg-white min-w-screen animation-fade animation-delay">
-            <div class="container px-0 px-8 mx-auto sm:px-12 xl:px-5">
-                <p
-                    class="text-xs font-bold text-left text-pink-500 uppercase sm:mx-6 sm:text-center sm:text-normal sm:font-bold">
-                    Got a Question? We’ve got answers.
-                </p>
-                <h3
-                    class="mt-1 text-2xl font-bold text-left text-gray-800 sm:mx-6 sm:text-3xl md:text-4xl lg:text-5xl sm:text-center sm:mx-0">
-                    Frequently Asked Questions
-                </h3>
-                <div
-                    class="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
-                    <h3 class="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">How does it work?</h3>
-                    <p class="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                        Our platform works with your content to provides insights and metrics on how you can grow your
-                        business and scale your infastructure.
-                    </p>
-                </div>
-                <div
-                    class="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
-                    <h3 class="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">Do you offer team pricing?</h3>
-                    <p class="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                        Yes, we do! Team pricing is available for any plan. You can take advantage of 30% off for
-                        signing up
-                        for team pricing of 10 users or more.
-                    </p>
-                </div>
-                <div
-                    class="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
-                    <h3 class="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">How do I make changes and
-                        configure
-                        my site?</h3>
-                    <p class="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                        You can easily change your site settings inside of your site dashboard by clicking the top right
-                        menu and clicking the settings button.
-                    </p>
-                </div>
-                <div
-                    class="w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
-                    <h3 class="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">How do I add a custom domain?
-                    </h3>
-                    <p class="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
-                        You can easily change your site settings inside of your site dashboard by clicking the top right
-                        menu and clicking the settings button.
-                    </p>
-                </div>
-            </div>
-        </section>
 
     </SiteLayout>
 

@@ -4,20 +4,20 @@ import NavbarComponent from '@/Pages/Layout/NavbarComponent.vue';
 
 defineProps({
     appName: String,
-    appSlogan: String
+    appSlogan: String,
+    Categories: Array
 })
 </script>
 
 <template>
 
     <!-- Section 1 -->
-    <NavbarComponent :appName="appName" />
-
+    <NavbarComponent :appName="appName" :Categories="Categories" />
     <!-- Section 2 -->
     <main>
         <slot />
     </main>
     <!-- Footer-->
-    <FooterComponent :appName="appName" :appSlogan="appSlogan" />
+    <FooterComponent :appName="appName" :appSlogan="appSlogan" :Categories="Categories" />
 
 </template>
