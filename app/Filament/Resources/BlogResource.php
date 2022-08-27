@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
+use App\Tables\Columns\Description;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -57,11 +58,11 @@ class BlogResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('catch_line'),
+                Description::make('title'),
+                Description::make('catch_line'),
                 Tables\Columns\TextColumn::make('category.name')->label('category'),
-                Tables\Columns\TextColumn::make('catch_line'),
-                Tables\Columns\ImageColumn::make('cover_image'),
+                Description::make('catch_line'),
+                Tables\Columns\ImageColumn::make('cover_image')->disk('cover_images'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

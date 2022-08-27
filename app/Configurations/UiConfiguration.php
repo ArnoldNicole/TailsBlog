@@ -37,7 +37,7 @@ class UiConfiguration extends Configuration
         if ($conf == null) {
             return false;
         } else {
-            $conf->update(['key' => $value]);
+            $conf->update(['value' => $value]);
             return true;
         }
     }

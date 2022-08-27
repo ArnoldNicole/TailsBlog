@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
+use App\Tables\Columns\Colorpicker;
+use App\Tables\Columns\Description;
+use App\Tables\Columns\Image;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -30,11 +33,11 @@ class CategoryResource extends Resource
                 Forms\Components\ColorPicker::make('color')
                     ->required(),
                 Forms\Components\TextInput::make('headline')
-                    ->required()
-                    ->maxLength(255),
+                    ->maxLength(25)
+                    ->required(),
                 Forms\Components\TextInput::make('sub_headline')
-                    ->required()
-                    ->maxLength(255),
+                    ->maxLength(25)
+                    ->required(),
                 Forms\Components\Textarea::make('tagline')
                     ->required()
                     ->rows(3)
@@ -52,17 +55,13 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('color'),
-                Tables\Columns\TextColumn::make('headline'),
-                Tables\Columns\TextColumn::make('sub_headline'),
-                Tables\Columns\TextColumn::make('tagline'),
-                Tables\Columns\TextColumn::make('image'),
+                Colorpicker::make('color'),
+                Description::make('headline'),
+                Description::make('sub_headline'),
+                Image::make('image'),
+                Description::make('tagline'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                    ->dateTime()
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
